@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1> USO DEL PROXY</h1>
+  <script src="./Levenshtein.js"></script>
+  <script>
+    const target ={
+      red:'rojo',
+      green:'verde',
+      yellow:'amarillo'
+    }
+    const handler = {
+      get(obj, prop){
+        if (prop in  obj){
+          return obj[prop];
+        }
+        const suggestion = Object.keys(obj).find(key =>{
+          return Levenshtein.get(key,prop)<=3
+        })
+        if (suggestion){
+          console.log(`${prop} no se encontro quisiste decir ${suggestion}`);
+        }
+        return obj[prop];
+      }
+    }
+    const p = new Proxy (target, handler);
+  </script>
+</body>
+</html>
