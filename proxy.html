@@ -8,20 +8,59 @@
 <body>
   <h1> USO DEL PROXY</h1>
   <p> El proxy tiene varios metodos que nos permiten
-    intersectar los datos para procesarlos
+    intersectar la propiedades de un objeto para procesarlo
   </p>
   <p> En el siguiente enlace esta la descripcion de esos metodos:
   <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Proxy">aqui</a></p>
-  <p>Para volver al menu inicial, haz click aqui</p>
-  <a href="index.html">Home</a>
+  <h1>LEVENSHTEIN</h1>
+  <p>Es una libreria que nos permite comparar dos cadenas de texto</p>
+  <p> Utilizando el Levenshtein para corregir el la escritura del color elegido</p>
+  <p> sigue los pasos</p>
+  <form >
+    <label for="setColor">1. Elige el color:</label>
+    <input type="elige un color" name="color" id="colorSelected">
+  </form>
+  <p id="resultColor"></p>
+  <button id="selectColor">Seleccionar</button>
   <script src="./assets/Levenshtein.js"></script>
   <script>
+    let result;
+    const selectColor = document.getElementById('selectColor');
+    selectColor.onclick = (result) => comparetedColor();
+    console.log(result);
+
+/*     const resultColor = document.getElementById('resultColor');
+    resultColor.value = "carlos";
+    debugger */
+    function comparetedColor(){
+    const colorSelected = document.getElementById('colorSelected')
+    console.log (colorSelected.value);
+    let color = colorSelected.value;
+        if (color in  targetColor){
+          return targeColor[color];
+        }
+        const suggestion = Object.keys(targetColor).find(key =>{
+          return Levenshtein.get(key,color)<=3
+        })
+        if (suggestion){
+          console.log(`${color} no se encontro talvez quisiste decir ${suggestion}`);
+        }
+        return targetColor[color];
+      }
+  const targetColor ={
+      red:'rojo',
+      green:'verde',
+      yellow:'amarillo'
+    }
+
+     /* USO DEL PROXY 
     const target ={
       red:'rojo',
       green:'verde',
       yellow:'amarillo'
     }
     const handler = {
+    
       get(obj, prop){
         if (prop in  obj){
           return obj[prop];
@@ -35,7 +74,9 @@
         return obj[prop];
       }
     }
-    const p = new Proxy (target, handler);
+    const p = new Proxy (target, handler); */
   </script>
+  <p>Para volver al menu inicial, haz click aqui</p>
+  <a href="index.html">Home</a>
 </body>
 </html>
