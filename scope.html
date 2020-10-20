@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/Style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1> USO DEL SCOPE</h1>
+  <p>Existen cuatro tipos de scope:</p>
+  <ol>
+    <li>Scope globla</li> Cuando el objeto declarado puede accederse desde el window.
+    <li>Scope funcion</li> Cuando el objeto declarado solo tiene valides en una función.
+    <li>Scope bloque</li> Cuando el objeto declarado es para un determinado bloque de codigo.
+    <li>Scope modulo</li> Los objetos declarados en los "*.js" no pueden ser llamdos en window.
+  </ol>
+  <a href="/index.html"> volver a home</a>
+  <script>
+    //SCOPE GLOBAL
+/*     function printerValue(){
+      for( var i=0;i<10;i++){
+        setTimeout(function(){
+          console.log(i);  
+        },100)
+      }
+    }
+    printerValue();*/
+    //SCOPE DE FUNCIONES
+    function printerValue(){
+      for( var i=0;i<10;i++){
+        console.log(`valor de i:${i}`)
+        function eventualyPrinter(n){
+          console.log(`valor de n:${n}`)
+          setTimeout(function(){
+            console.log(`valor de i despues del timeout:${i}`); 
+            console.log(`valor de n despues del timeout:${n}`); 
+          },100)
+        }
+        eventualyPrinter(i);
+        console.log("llamando funcion");
+      }
+    }
+    printerValue();
+    //SCOPE DE BLOQUE, en la consola, en scope windows i no exite
+    for(let i=0;i<13;i++){
+      console.log(i);
+    }
+  </script>
+</body>
+</html>

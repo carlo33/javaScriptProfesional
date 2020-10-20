@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles/Style.css">
+</head>
+<body>
+  <h1>HERENCIA PROTOTIPAL</h1>
+  <p>SomeObject.prototype es un objeto donde definimos el prototipo de las instancias 
+    de SomeObject. Es decir las instancias del SomeObject van a heredar del SomeObject.prototype
+  </p>
+  <h2>FUNCIONES NUEVAS</h2>
+    <ol>
+      <li>hasOwnProperty("name")</li>Para verificar si una propiedad
+        le pertenece a un objeto
+        <li>Object.getPrototypeOf(zelda)</li>Nos permite obtener el prototipo
+        de un objeto
+
+      </ol>
+  <h2>CONCLUSIONES</h2>
+  <p>1. Al crear diferentes metodos dentro de una  función estos se guardar en el PROTOTYPE, cuando 
+    instanciamos esta función a un nuevo objeto, estos metodos tambien se instancia dentro del PROTOTIPE
+    del nuevo objeto, pero en realidad es el mismo objeto
+  </p>
+  <p>2. El prototype del prototype es heredado del "Object" que es 
+    la base para crear funciones </p>
+    <a href="./index.html">Volver al Home</a>
+  <script>
+    function Hero(name){
+      this.name = name;
+    }
+    Hero.prototype.saludar = function(){
+      console.log(`hola, soy${this.name}`);
+    }
+    const zelda = new Hero(' zelda');
+    zelda.saludar();
+    //propiedades de la instancia
+    console.log(zelda.name);
+    //propiedades de la funcion
+    console.log(zelda.saludar);
+    //propiedades heredadas del object
+    console.log(zelda.toString);
+    //hasOwnProperty para ver si una propiedad le pertenece.
+    console.log('zelda.hasOwnProperty("name"):',zelda.hasOwnProperty("name"));
+    console.log('zelda.hasOwnProperty("saludar"):',zelda.hasOwnProperty("saludar"));
+    //obtiniendo el protipo de un objeto
+    console.log('prototype de zelda:',Object.getPrototypeOf(zelda));
+    const prototypeOfZelda = Object.getPrototypeOf(zelda);
+    //comparando el prototype del objeto instanciado con el prototype de la funcion inicial
+    console.log('el prototype del objeto instanciado con el prototype de la funcion inicial son iguales?');
+    console.log(prototypeOfZelda===Hero.prototype);
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/Style.css">
+  <title>Closure</title>
+</head>
+<body>
+  <h1>CLOSURE</h1>
+  <p> Una clausura o closure es una función que guarda referencias del estado adyacente (ámbito léxico). 
+    En otras palabras, una clausura permite acceder al ámbito de una función exterior desde una función interior. 
+    En JavaScript, las clausuras se crean cada vez que una función es creada</p>
+  <a href="/index.html">volver home</a>
+  <script>
+    //IIFE
+    (function(){
+      let color = 'green';
+      function printColor(){
+        console.log(color);
+      }
+      printColor();
+    })()
+    //funcion que regresa otra funcion
+    function ColorPrinter (color){
+      return function (){
+        console.log(`este es mi color ${color}`);
+      }
+    }
+    let greenColorPrinter = ColorPrinter('verde');
+    console.log(greenColorPrinter());  
+
+    //
+  </script>
+</body>
+</html>
