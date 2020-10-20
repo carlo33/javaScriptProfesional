@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/Style.css">
   <title>Document</title>
 </head>
 <body>
   <h1>GENERATOR</h1>
   <p>Los Generadores nos permiten ejecutar funciones hasta un determinado punto,
-para luego continuar cuando volvamos a solicitarlo mediante la funcion NEXT()
+para luego continuar cuando volvamos a solicitarlo mediante la funcion NEXT(), caracteristicas:
   </p>
-  <a href="index.html">Index</a>
+  <ol>
+    <li> function*</li> se denota de esta forma a los GENERATOR
+    <li> yield</li> se puede detener la función y devolver un valor.
+    <li>next()</li> se solicita que se continue con la ejecución del GENERETOR
+  </ol>
+  <a href="index.html">Vovler al home</a>
   <script>
 
     //Primer generador
@@ -19,16 +25,21 @@ para luego continuar cuando volvamos a solicitarlo mediante la funcion NEXT()
       yield 2;
       console.log('Generator end');
     }
+    console.log('llamando al GENERATOR "gen"');
+    const gen = simpleGenerator();
+    gen.next();
+    console.log('solicitando que continue gen.next()')
+    gen.next();
     //Podemos hacer generadores infinitos
-    function* idMarker(){
+/*     function* idMarker(){
       let id=1;
       while(true){
         yield id;
         id+=1;
       }
-    }
+    } */
     //cuando pasamos next() tambien podemos pasarle un valor
-    function* idMarker2(){
+/*     function* idMarker2(){
       let id=1;
       let reset;
       while(true){
@@ -40,7 +51,7 @@ para luego continuar cuando volvamos a solicitarlo mediante la funcion NEXT()
           id+=1;
         }
       }
-    }
+    } */
   
   </script>
 </body>

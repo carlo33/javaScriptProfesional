@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./styles/Style.css">
 </head>
 <body>
   <h1> USO DEL PROXY</h1>
@@ -12,6 +13,12 @@
   </p>
   <p> En el siguiente enlace esta la descripcion de esos metodos:
   <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Proxy">aqui</a></p>
+  <p>En este caso utilizaremos el metodo:</p>
+  <ol>
+    <li>get</li> Es un metodo que nos permite intersectar una propiedad antes de que llegue al objeto target
+    <li>target</li> Es el objeto que tiene las propiedades
+    <li>handler</li> Es el objeto que nos permite realizar una  acción con el valor intersectado.
+  </ol>
   <h1>LEVENSHTEIN</h1>
   <p>Es una libreria que nos permite comparar dos cadenas de texto</p>
   <p> Utilizando el Levenshtein para corregir el la escritura del color elegido</p>
@@ -24,14 +31,12 @@
   <button id="selectColor">Seleccionar</button>
   <script src="./assets/Levenshtein.js"></script>
   <script>
+    //UTILIZACION DE LA LIBRERIA LEVENSHTEIN
     let result;
     const selectColor = document.getElementById('selectColor');
     selectColor.onclick = (result) => comparetedColor();
     console.log(result);
 
-/*     const resultColor = document.getElementById('resultColor');
-    resultColor.value = "carlos";
-    debugger */
     function comparetedColor(){
     const colorSelected = document.getElementById('colorSelected')
     console.log (colorSelected.value);
@@ -53,7 +58,7 @@
       yellow:'amarillo'
     }
 
-     /* USO DEL PROXY 
+     //USO DEL PROXY 
     const target ={
       red:'rojo',
       green:'verde',
@@ -74,9 +79,12 @@
         return obj[prop];
       }
     }
-    const p = new Proxy (target, handler); */
+    const p = new Proxy (target, handler);
+    console.log('escribiendo p.red',p.red);
+    console.log('escribiendo p.ged',p.ged);
   </script>
-  <p>Para volver al menu inicial, haz click aqui</p>
-  <a href="index.html">Home</a>
+  <p>
+    <a href="index.html">volver al home</a>
+  </p>
 </body>
 </html>
