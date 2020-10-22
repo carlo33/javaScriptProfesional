@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/Style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1> NEW PROMISE</h1>
+  <p> Las promesas son una forma de realizar un procesamiento asincrono.
+    Es un objeto que representa el fracaso o exito de una  operación  que se realizara en 
+    el futuro
+  </p>
+  <ul>
+    <li>New promise</li> sirve para crear una promesa
+    <li>resolve</li> La función devulta si la promesa tiene exito
+    <li>reject</li> La funcion devuelta si la promesa falla
+    <li>then</li> Es un metodo que recibe dos argumento para los casos de exito
+    y fracaso de una promesa.
+    <li>catch</li> ejecuta una funcion  cuando se produce un error en la promesa
+  </ul>
+  <p>Ejemplo de promesas</p>
+  <form>
+    <label for="setNumber">Escribe algo</label>
+    <input type="text" id="inputNumber">
+  </form>
+  <button id="resolvePromise">Es un numero?</button>
+  <button id="resolveAwait">Await</button>
+  <button id='getMovies'>Obtner peliculas</button>
+  <script>
+
+    const selectNumber = document.getElementById('resolvePromise');
+    selectNumber.onclick = () => {
+      resolveAfter2Seconds()
+        .then(response => console.log(`ingresaste el numero: ${response}`))
+        .catch( error => console.log('No es un numero'))
+    }
+    const selectNumber2 = document.getElementById('resolveAwait');
+    selectNumber2.onclick = ()=>{
+      functionAsincrony();
+    }
+    let url = 'https://api.themoviedb.org/3/movie/3?api_key=94051dc5b771a1d2dbeb7a0f7863d9ad';
+    const getMovies = document.getElementById('getMovies');
+    getMovies.onclick = ()=>{
+      let movies = getMovie(3);
+      console.log(movies);
+    }
+    const apiKey = '94051dc5b771a1d2dbeb7a0f7863d9ad';
+    function resolveAfter2Seconds() { 
+      const inputNumber = document.getElementById('inputNumber');
+      console.log('numero leido:',inputNumber.value);
+      let x = inputNumber.value;
+      return new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        console.log('este es el numero de la promesa:',x);
+        newImput = parseInt(x);
+        let isNumber = x - 2;
+        if (!Number.isNaN(isNumber)){
+          resolve(x);
+        }else {
+          reject('error');
+        }
+      },2000)
+    })
+    }
+
+  //segunda forma de leer la respuesta de una promesa
+  ///////////////////////////
+  async function functionAsincrony() {
+    var x = await resolveAfter2Seconds(); 
+    console.log('el valor leido es:',x); // 10
+  } 
+  ///////////////fetch//////
+  function getMovie(id) {
+      const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+      return fetch(url).then(response => response.json());
+      }
+
+/*     return new Promise ((resolve,reject)=>{
+      console.log(url);
+      debugger;
+      fetch (url)
+        .then(response => {
+        if(response.ok){
+          return response.json();
+        }
+          return reject ('error');
+        })
+        .then( texto => resolve(texto) )
+        .catch(err => reject(err) );
+    }) */
+  </script>
+    <a href="./index.html">volver a home</a>
+</body>
+</html>
