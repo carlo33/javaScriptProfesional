@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1> Abort Controller</h1>
+  <p> Nos permite interrumpir una peticion que se este realizando</p>
+  <p>El abort controller es una clase, primero instanciamos la clase</p>
+  <p>para poder abortar un petición necesitamos mandar un "SIGNAL" al
+    momento de realizar el FETCH
+  </p>
+  <p>de la NEW CLASS instanciada obtenemos su parametro SIGNAL para 
+    mandarlos al fetch
+  </p>
+  <p> siempre es recomendado usar un "TRY" al momento de usar un abort controler</p>
+  <p>Ejemplo: vamos a cargar la siguiente imangen:</p>
+  <img id= 'huge-image'height="200" />
+  <button id='load'> Load imagen</button>
+  <button id='stop'> stop fetching</button>
+  <script>
+    const url = 'https://upload.wikimedia.org/wikipedia/commons/b/bf/2009-3-14_ManUtd_vs_LFC_Ronaldo_Freekick_Back.JPG';
+    const img = document.getElementById('huge-image');
+    const loadButton = document.getElementById('load');
+    const stopButton = document.getElementById('stop');
+    let controler;
+    function startLoading (){
+      loadButton.disabled = true;
+      loadButton.innerText = 'Loading...'
+      stopButton.disabled = false;
+    } 
+    function stopLoading(){
+      loadButton.disabled = false;
+      loadButton.innerText = 'Load HUGE Image';
+      stopButton.disabled = true;
+    }
+    loadButton.onclick = async function(){
+      startLoading();
+      controler = new AbortController()
+      try{
+        const response = await fetch(url,{ signal: controler.signal });
+        const blob = await response.blob();
+        const imgUrl = URL.createObjectURL(blob);
+        img.src = imgUrl;
+      }catch(error){
+        console.log(error.message);
+      }
+    }
+    stopButton.onclick = async function(){        
+      controler.abort();
+      stopLoading();
+    }
+  </script>
+</body>
+</html>
